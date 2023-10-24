@@ -17,12 +17,12 @@ SEND_VIDEO = True
 
 nest_asyncio.apply()
 
-# Налаштування аудіозапису
+# Audio recording settings
 audio_stream = pa.PyAudio()
-audio_format = pa.paInt16  # Формат аудіоданих
-audio_channels = 1  # Кількість аудіоканалів (1 для моно, 2 для стерео)
-audio_rate = 44100  # Частота дискретизації (герц)
-audio_chunk = 1024  # Розмір блоку даних
+audio_format = pa.paInt16  # Audio data format
+audio_channels = 1  # Number of audio channels (1 for mono, 2 for stereo)
+audio_rate = 44100  # Sampling rate (hertz)
+audio_chunk = 1024  # Data block size
 
 audio_recorder = audio_stream.open(
     format=audio_format,
@@ -39,7 +39,7 @@ def send_frame(frame):
         frame_base64 = base64.b64encode(frame).decode('utf-8')
         client_socket.send(frame_base64.encode('utf-8'))
     except ConnectionRefusedError:
-        print("Порт не слухає, але програма продовжує працювати")
+        print("The port is not listening, but the program continues to work")
     finally:
         client_socket.close()
 

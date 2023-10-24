@@ -9,15 +9,15 @@ async def receive_video():
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_socket.bind(('localhost', 25544))
     server_socket.listen(1)
-    print("Сервер запущений. Очікуємо на з'єднання...")
+    print("Server started. Waiting for connection...")
 
     while True:
         client_socket, addr = server_socket.accept()
-        print(f"Клієнт {addr} підключився")
+        print(f"Client {addr} connected")
 
         data = b""
         while True:
-            chunk = client_socket.recv(1024)
+            chunk = client_socket.recv(10240)
             if not chunk:
                 break
             data += chunk
